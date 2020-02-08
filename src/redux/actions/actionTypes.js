@@ -1,0 +1,5 @@
+export const SELECT_HEAD = 'SELECT_HEAD'
+export const SELECT_EYES = 'SELECT_EYES'
+export const SELECT_MOUTH = 'SELECT_MOUTH'
+export const SELECT_NOSE = 'SELECT_NOSE'
+export const SELECT_EXTRAS = 'SELECT_EXTRAS'
