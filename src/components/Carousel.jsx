@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { BrowserView, MobileView, isMobile } from 'react-device-detect'
-import MaterialIcon, { colorPalette } from 'material-icons-react'
+import MaterialIcon from 'material-icons-react'
 import Button from './Button'
 
 class Carousel extends Component {
