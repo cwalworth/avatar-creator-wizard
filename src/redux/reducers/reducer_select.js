@@ -46,7 +46,7 @@ export default function(state = initialState, action) {
     case 'SELECT_EXTRAS':
       return {
         ...state,
-        extras: { name: action.payload.extras, color: action.payload.color }
+        extras: { name: action.payload.extra, color: action.payload.color }
       }
     default:
       return state

@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import domtoimage from 'dom-to-image'
+import { saveAs } from 'file-saver'
 import Head from './Head'
 import Eyes from './Eyes'
 import Mouth from './Mouth'
@@ -8,6 +10,12 @@ import Nose from './Nose'
 import Extra from './Extra'
 
 const Monster = props => {
+  const getImage = e => {
+    const node = e.target.parentElement
+    domtoimage.toBlob(node).then(function(blob) {
+      window.saveAs(blob, 'my-avatar.png')
+    })
+  }
   return (
     <StyledMonster>
       <div className="container container--head">
@@ -31,6 +39,9 @@ const Monster = props => {
           color={props.select.extras.color}
         />
       </div>
+      <button className="save-image" onClick={e => getImage(e)}>
+        Save image
+      </button>
     </StyledMonster>
   )
 }
@@ -38,8 +49,15 @@ const Monster = props => {
 const StyledMonster = styled.div`
   height: 400px;
   width: 100%;
+  max-width: 400px;
   position: relative;
-  display: flex;
+  align-self: center;
+  .save-image {
+    position: absolute;
+    z-index: 10;
+    top: -35px;
+    right: 45%;
+  }
   .container {
     position: absolute;
     &--head {

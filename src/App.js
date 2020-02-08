@@ -67,7 +67,7 @@ class App extends Component {
       case 'nose':
         store.dispatch(selectNose(shape, true))
         break
-      case 'extras':
+      case 'extra':
         store.dispatch(selectExtras(shape, true))
         break
     }
@@ -138,14 +138,24 @@ class App extends Component {
               name="previous"
               handleClick={e => this.handleClick(e, shapes)}
             >
-              <MaterialIcon name="previous" icon="arrow_back" size={100} />
+              <MaterialIcon
+                color={'#01579B'}
+                name="previous"
+                icon="arrow_back"
+                size={100}
+              />
             </Button>
             <Button
               secondary
               name="next"
               handleClick={e => this.handleClick(e, shapes)}
             >
-              <MaterialIcon name="next" icon="arrow_forward" size={100} />
+              <MaterialIcon
+                color={'#01579B'}
+                name="next"
+                icon="arrow_forward"
+                size={100}
+              />
             </Button>
           </div>
         </MobileView>

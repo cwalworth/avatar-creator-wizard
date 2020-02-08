@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { isMobile } from 'react-device-detect'
 
 const Button = ({ primary, children, handleClick, name }) => {
   return (
@@ -14,9 +15,9 @@ const StyledButton = styled.div`
   user-select: none;
   margin-top: 10px;
   text-align: center;
-  min-width: ${props => (props.primary ? '80px' : '40px')};
+  min-width: ${props => (props.primary ? '80px' : '30px')};
   border: ${props => (props.primary ? '2px solid navy' : '2px solid darkblue')};
-  padding: ${props => (props.primary ? '20px' : '10px')};
+  padding: ${props => (props.primary ? '20px' : isMobile ? '0px' : '10px')};
   border-radius: ${props => (props.primary ? '10px' : '6px')};
 `
 

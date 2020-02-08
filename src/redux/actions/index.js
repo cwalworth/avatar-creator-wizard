@@ -30,9 +30,9 @@ export const selectNose = nose => {
     payload: nose
   }
 }
-export const selectExtras = extras => {
+export const selectExtras = extra => {
   return {
     type: SELECT_EXTRAS,
-    payload: extras
+    payload: extra
   }
 }

@@ -46,17 +46,37 @@ class Carousel extends Component {
         </div>
         <BrowserView>
           <div className="controls">
-            <Button handleClick={() => this.handleClick('left')}>Left</Button>
-            <Button handleClick={() => this.handleClick('right')}>Right</Button>
+            <Button handleClick={() => this.handleClick('left')}>
+              <MaterialIcon
+                color={'#29B6F6'}
+                icon="keyboard_arrow_left"
+                size={40}
+              />
+            </Button>
+            <Button handleClick={() => this.handleClick('right')}>
+              <MaterialIcon
+                color={'#29B6F6'}
+                icon="keyboard_arrow_right"
+                size={40}
+              />
+            </Button>
           </div>
         </BrowserView>
         <MobileView>
           <div className="controls">
             <Button handleClick={() => this.handleClick('left')}>
-              <MaterialIcon icon="keyboard_arrow_left" size={50} />
+              <MaterialIcon
+                color={'#29B6F6'}
+                icon="keyboard_arrow_left"
+                size={50}
+              />
             </Button>
             <Button handleClick={() => this.handleClick('right')}>
-              <MaterialIcon icon="keyboard_arrow_right" size={50} />
+              <MaterialIcon
+                color={'#29B6F6'}
+                icon="keyboard_arrow_right"
+                size={50}
+              />
             </Button>
           </div>
         </MobileView>

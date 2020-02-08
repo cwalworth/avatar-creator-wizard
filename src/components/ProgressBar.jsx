@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { BrowserView, MobileView, isMobile } from 'react-device-detect'
 
 const ProgressBar = ({ progress }) => {
   return (
@@ -14,11 +13,12 @@ const StyledProgressBar = styled.div`
   width: 100%;
   height: 40px;
   z-index: 10;
-  background: grey;
+  background: lightgrey;
   border-radius: 10px;
   border: 2px solid darkgrey;
   top: 0;
   .inner {
+    border-radius: 10px;
     height: 100%;
     background: lightblue;
     transition: width 0.2s ease-in-out;
