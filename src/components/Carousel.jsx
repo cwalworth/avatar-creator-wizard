@@ -7,7 +7,8 @@ import Button from './Button'
 class Carousel extends Component {
   state = {
     active: 0,
-    feature: ''
+    feature: '',
+    bodyPart: ''
   }
   handleClick = direction => {
     const isLeft = direction.toLowerCase() === 'left'
@@ -28,21 +29,35 @@ class Carousel extends Component {
     })
     handleShapeClick(feature.props)
   }
+  handleActiveBodyPart = part => {
+    const newPart = Object.keys(part.name.props)[0]
+    const currentPart = this.state.bodyPart
+    if (newPart !== currentPart) {
+      this.setState(prevState => ({
+        bodyPart: prevState.bodyPart === newPart ? prevState.bodyPart : newPart
+      }))
+    } else {
+      return
+    }
+  }
   render() {
     return (
       <StyledCarousel active={this.state.active}>
-        <h2 className="title">Select your parts</h2>
+        <h2 className="title">Select your {this.state.bodyPart}</h2>
         <div className="content-wrapper">
-          {this.props.items.map(item => (
-            <div
-              onClick={() =>
-                this.selectFeature(item.name, this.props.handleShapeClick)
-              }
-              className="item"
-            >
-              {item.name}
-            </div>
-          ))}
+          {this.props.items.map(item => {
+            this.handleActiveBodyPart(item)
+            return (
+              <div
+                onClick={() =>
+                  this.selectFeature(item.name, this.props.handleShapeClick)
+                }
+                className="item"
+              >
+                {item.name}
+              </div>
+            )
+          })}
         </div>
         <div className="controls">
           <BrowserView>

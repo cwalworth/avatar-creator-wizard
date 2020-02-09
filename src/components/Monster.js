@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
+import Button from './Button'
 import Head from './Head'
 import Eyes from './Eyes'
 import Mouth from './Mouth'
@@ -39,9 +40,11 @@ const Monster = props => {
           color={props.select.extras.color}
         />
       </div>
-      <button className="save-image" onClick={e => getImage(e)}>
-        Save image
-      </button>
+      <div className="save-image">
+        <Button primary className="save-image" onClick={e => getImage(e)}>
+          Save image
+        </Button>
+      </div>
     </StyledMonster>
   )
 }
@@ -57,6 +60,18 @@ const StyledMonster = styled.div`
     z-index: 10;
     top: -35px;
     right: 45%;
+    & > div {
+      padding: 5px;
+      margin: 0;
+      background: lightseagreen;
+    }
+    filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.8));
+    &:hover {
+      filter: drop-shadow(1px 1px 0px rgba(0, 0, 0, 0.8));
+    }
+    &:active {
+      filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.8));
+    }
   }
   .container {
     position: absolute;

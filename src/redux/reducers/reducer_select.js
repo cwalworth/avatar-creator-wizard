@@ -1,23 +1,23 @@
 const initialState = {
   head: {
     name: '',
-    color: 'rgb(82, 167, 200)'
+    color: ''
   },
   eyes: {
     name: '',
-    color: 'rgb(82, 167, 200)'
+    color: ''
   },
   mouth: {
     name: '',
-    color: 'rgb(82, 167, 200)'
+    color: ''
   },
   nose: {
     name: '',
-    color: 'rgb(82, 167, 200)'
+    color: ''
   },
   extras: {
     name: '',
-    color: 'rgb(82, 167, 200)'
+    color: ''
   }
 }
 
