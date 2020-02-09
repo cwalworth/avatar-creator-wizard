@@ -44,71 +44,83 @@ class Carousel extends Component {
             </div>
           ))}
         </div>
-        <BrowserView>
-          <div className="controls">
+        <div className="controls">
+          <BrowserView>
             <Button handleClick={() => this.handleClick('left')}>
               <MaterialIcon
-                color={'#29B6F6'}
+                color={'rgb(25, 62, 77)'}
                 icon="keyboard_arrow_left"
                 size={40}
               />
             </Button>
             <Button handleClick={() => this.handleClick('right')}>
               <MaterialIcon
-                color={'#29B6F6'}
+                color={'rgb(25, 62, 77)'}
                 icon="keyboard_arrow_right"
                 size={40}
               />
             </Button>
-          </div>
-        </BrowserView>
-        <MobileView>
-          <div className="controls">
+          </BrowserView>
+          <MobileView>
             <Button handleClick={() => this.handleClick('left')}>
               <MaterialIcon
-                color={'#29B6F6'}
+                color={'rgb(25, 62, 77)'}
                 icon="keyboard_arrow_left"
                 size={50}
               />
             </Button>
             <Button handleClick={() => this.handleClick('right')}>
               <MaterialIcon
-                color={'#29B6F6'}
+                color={'rgb(25, 62, 77)'}
                 icon="keyboard_arrow_right"
                 size={50}
               />
             </Button>
-          </div>
-        </MobileView>
+          </MobileView>
+        </div>
       </StyledCarousel>
     )
   }
 }
 
 const StyledCarousel = styled.div`
+  position: relative;
   box-sizing: border-box;
   width: 100%;
   height: 160px;
   overflow: hidden;
-  border: 4px dashed lightblue;
-  box-shadow: 4px 4px 2px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  border-right: none;
+  border-bottom: none;
+  box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.6);
   border-radius: 10px;
   .title {
     position: absolute;
     margin: 0;
+    z-index: 1;
+    pointer-events: none;
     font-size: ${isMobile ? '14px' : '30px'};
-  }
-  .content-wrapper,
-  .controls {
-    display: flex;
+    padding: 10px 0 0 10px;
+    text-shadow: 1px 1px #fff;
+    color: #333;
   }
   .controls {
     position: absolute;
-    justify-content: space-between;
+    bottom: 0;
     width: 100%;
     max-width: 800px;
+    pointer-events: none;
+    & > div {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      & > div {
+        pointer-events: auto;
+      }
+    }
   }
   .content-wrapper {
+    display: flex;
     height: 100%;
     transition: all 0.2s ease-in-out;
     transform: translateX(${props => -100 * props.active}%);

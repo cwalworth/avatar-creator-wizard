@@ -27,6 +27,7 @@ class ColorSelector extends Component {
     return (
       <StyledColorSelector colors={{ red, green, blue }}>
         <SliderPicker
+          direction={`vertical`}
           color={`rgb(${red}, ${green}, ${blue})`}
           onChangeComplete={this.handleChangeComplete}
         />
@@ -37,7 +38,7 @@ class ColorSelector extends Component {
 
 const StyledColorSelector = styled.div`
   width: 100%;
-  margin-top: 80px;
+  margin: 40px 0;
 `
 
 export default ColorSelector
