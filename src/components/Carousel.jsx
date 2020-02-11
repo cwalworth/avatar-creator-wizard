@@ -10,6 +10,13 @@ class Carousel extends Component {
     feature: '',
     bodyPart: ''
   }
+  componentDidUpdate() {
+    if (this.state.bodyPart === 'extra' && this.state.active === 2) {
+      this.setState({
+        active: 1
+      })
+    }
+  }
   handleClick = direction => {
     const isLeft = direction.toLowerCase() === 'left'
     const numberOfItems = this.props.items.length
@@ -43,12 +50,13 @@ class Carousel extends Component {
   render() {
     return (
       <StyledCarousel active={this.state.active}>
-        <h2 className="title">Select your {this.state.bodyPart}</h2>
+        <h2 className="title">Select {this.state.bodyPart}</h2>
         <div className="content-wrapper">
-          {this.props.items.map(item => {
+          {this.props.items.map((item, index) => {
             this.handleActiveBodyPart(item)
             return (
               <div
+                key={`item${index}`}
                 onClick={() =>
                   this.selectFeature(item.name, this.props.handleShapeClick)
                 }

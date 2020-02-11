@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { connect } from 'react-redux'
 import MaterialIcon from 'material-icons-react'
 
 class Tips extends Component {

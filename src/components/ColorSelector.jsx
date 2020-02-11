@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { SliderPicker } from 'react-color'
+import { isMobile } from 'react-device-detect'
 
 class ColorSelector extends Component {
   state = {
@@ -38,7 +39,7 @@ class ColorSelector extends Component {
 
 const StyledColorSelector = styled.div`
   width: 100%;
-  margin: 40px 0;
+  margin: ${isMobile ? '30px 0 10px' : '40px 0'};
 `
 
 export default ColorSelector

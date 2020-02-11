@@ -7,11 +7,11 @@ import ColorSelector from './components/ColorSelector'
 import ProgressBar from './components/ProgressBar'
 import Carousel from './components/Carousel'
 import Button from './components/Button'
-import Head from './components/Head'
-import Eyes from './components/Eyes'
-import Mouth from './components/Mouth'
-import Nose from './components/Nose'
-import Extra from './components/Extra'
+import Head from './components/avatar/Head'
+import Eyes from './components/avatar/Eyes'
+import Mouth from './components/avatar/Mouth'
+import Nose from './components/avatar/Nose'
+import Extra from './components/avatar/Extra'
 import Monster from './components/Monster'
 import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
@@ -80,6 +80,12 @@ class App extends Component {
       case 'extra':
         store.dispatch(selectExtras(shape, true))
         break
+      default:
+        store.dispatch(selectHead('', true))
+        store.dispatch(selectEyes('', true))
+        store.dispatch(selectMouth('', true))
+        store.dispatch(selectNose('', true))
+        store.dispatch(selectExtras('', true))
     }
   }
   render() {
@@ -119,6 +125,9 @@ class App extends Component {
             }}
           />
           <Monster />
+          <Button className="clear" handleClick={this.handleShapeClick}>
+            Clear
+          </Button>
           <Carousel
             handleShapeClick={this.handleShapeClick}
             items={shapes[this.state.activeWindow]}
@@ -192,6 +201,12 @@ const StyledApp = styled.div`
   margin: auto;
   display: flex;
   flex-direction: column;
+  .clear {
+    transition: opacity 0.3s ease-in-out;
+    &:hover {
+      opacity: 0.4;
+    }
+  }
   .controls-wrapper {
     width: 100%;
   }
@@ -201,8 +216,6 @@ const StyledApp = styled.div`
     align-items: center;
     width: 100%;
     position: ${isMobile ? 'fixed' : ''};
-    bottom: ${isMobile ? 0 : ''};
-    left: ${isMobile ? 0 : ''};
     &--desktop {
       & > div {
         text-transform: uppercase;

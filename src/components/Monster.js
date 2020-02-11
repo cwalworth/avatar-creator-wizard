@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import Head from './Head'
-import Eyes from './Eyes'
-import Mouth from './Mouth'
-import Nose from './Nose'
-import Extra from './Extra'
+import Head from './avatar/Head'
+import Eyes from './avatar/Eyes'
+import Mouth from './avatar/Mouth'
+import Nose from './avatar/Nose'
+import Extra from './avatar/Extra'
 
 const Monster = props => {
   return (
@@ -40,8 +40,6 @@ const StyledMonster = styled.div`
   width: 100%;
   max-width: 400px;
   position: relative;
-  /* align-self: center; */
-  /* margin: auto; */
   .container {
     position: absolute;
     &--head {
