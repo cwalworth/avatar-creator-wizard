@@ -9,7 +9,7 @@ class ColorSelector extends Component {
     green: 167,
     blue: 200
   }
-  handleChange = (e, colors) => {
+  handleChange = e => {
     const val = e.target.getAttribute('name')
     this.setState({
       [val]: e.target.value
