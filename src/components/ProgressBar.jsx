@@ -18,11 +18,12 @@ const StyledProgressBar = styled.div`
   border: 2px solid darkgrey;
   top: 0;
   box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.8);
+  margin-bottom: 10px;
   .inner {
     box-shadow: 2px 0px 2px rgba(0, 0, 0, 0.8);
     border-radius: 10px;
     height: 100%;
-    background: lightblue;
+    background: lightseagreen;
     transition: width 0.2s ease-in-out;
     width: ${props =>
       (props.progress.activeWindow / (props.progress.totalWindows - 1)) * 100}%;

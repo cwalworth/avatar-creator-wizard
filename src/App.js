@@ -13,6 +13,9 @@ import Mouth from './components/Mouth'
 import Nose from './components/Nose'
 import Extra from './components/Extra'
 import Monster from './components/Monster'
+import domtoimage from 'dom-to-image'
+import { saveAs } from 'file-saver'
+import Tips from './components/Tips'
 import {
   selectHead,
   selectEyes,
@@ -26,6 +29,13 @@ class App extends Component {
   state = {
     color: 'rgb(82, 167, 200)',
     activeWindow: 0
+  }
+
+  getImage = () => {
+    const node = document.querySelector('#monster')
+    domtoimage.toBlob(node).then(function(blob) {
+      window.saveAs(blob, 'my-avatar.png')
+    })
   }
 
   handleClick = (e, pages) => {
@@ -101,64 +111,74 @@ class App extends Component {
     ]
     return (
       <StyledApp className="App">
-        <ProgressBar
-          progress={{
-            activeWindow: this.state.activeWindow,
-            totalWindows: shapes.length
-          }}
-        />
-        <Monster />
-        <Carousel
-          handleShapeClick={this.handleShapeClick}
-          items={shapes[this.state.activeWindow]}
-        />
-        <ColorSelector handleChange={this.handleChangeColor} />
-        <BrowserView>
-          <div className="controls-main--desktop controls-main">
-            <Button
-              primary
-              name="previous"
-              handleClick={e => this.handleClick(e, shapes)}
-            >
-              Previous
-            </Button>
-            <Button
-              primary
-              name="next"
-              handleClick={e => this.handleClick(e, shapes)}
-            >
-              Next
-            </Button>
+        <Tips>
+          <ProgressBar
+            progress={{
+              activeWindow: this.state.activeWindow,
+              totalWindows: shapes.length
+            }}
+          />
+          <Monster />
+          <Carousel
+            handleShapeClick={this.handleShapeClick}
+            items={shapes[this.state.activeWindow]}
+          />
+          <ColorSelector handleChange={this.handleChangeColor} />
+          <div className="controls-wrapper">
+            <BrowserView>
+              <div className="controls-main--desktop controls-main">
+                <Button
+                  primary
+                  name="previous"
+                  handleClick={e => this.handleClick(e, shapes)}
+                >
+                  Previous
+                </Button>
+                <div className="save-image" onClick={() => this.getImage()}>
+                  Save image
+                </div>
+                <Button
+                  primary
+                  name="next"
+                  handleClick={e => this.handleClick(e, shapes)}
+                >
+                  Next
+                </Button>
+              </div>
+            </BrowserView>
+            <MobileView>
+              <div className="controls-main--mobile controls-main">
+                <Button
+                  secondary
+                  name="previous"
+                  handleClick={e => this.handleClick(e, shapes)}
+                >
+                  <MaterialIcon
+                    color={'#01579B'}
+                    name="previous"
+                    icon="arrow_back"
+                    size={100}
+                  />
+                </Button>
+                <div className="save-image" onClick={() => this.getImage()}>
+                  Save image
+                </div>
+                <Button
+                  secondary
+                  name="next"
+                  handleClick={e => this.handleClick(e, shapes)}
+                >
+                  <MaterialIcon
+                    color={'#01579B'}
+                    name="next"
+                    icon="arrow_forward"
+                    size={100}
+                  />
+                </Button>
+              </div>
+            </MobileView>
           </div>
-        </BrowserView>
-        <MobileView>
-          <div className="controls-main--mobile controls-main">
-            <Button
-              secondary
-              name="previous"
-              handleClick={e => this.handleClick(e, shapes)}
-            >
-              <MaterialIcon
-                color={'#01579B'}
-                name="previous"
-                icon="arrow_back"
-                size={100}
-              />
-            </Button>
-            <Button
-              secondary
-              name="next"
-              handleClick={e => this.handleClick(e, shapes)}
-            >
-              <MaterialIcon
-                color={'#01579B'}
-                name="next"
-                icon="arrow_forward"
-                size={100}
-              />
-            </Button>
-          </div>
-        </MobileView>
+        </Tips>
       </StyledApp>
     )
   }
@@ -172,9 +192,13 @@ const StyledApp = styled.div`
   margin: auto;
   display: flex;
   flex-direction: column;
+  .controls-wrapper {
+    width: 100%;
+  }
   .controls-main {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     position: ${isMobile ? 'fixed' : ''};
     bottom: ${isMobile ? 0 : ''};
@@ -190,6 +214,25 @@ const StyledApp = styled.div`
         &:active {
           box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.8);
         }
+      }
+    }
+    .save-image {
+      position: absolute;
+      z-index: 10;
+      bottom: 0;
+      right: 45%;
+      padding: 5px;
+      margin: 0;
+      margin-bottom: ${isMobile ? '40px' : ''};
+      background: lightseagreen;
+      border-radius: 6px;
+      cursor: pointer;
+      filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.8));
+      &:hover {
+        filter: drop-shadow(1px 1px 0px rgba(0, 0, 0, 0.8));
+      }
+      &:active {
+        filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.8));
       }
     }
   }

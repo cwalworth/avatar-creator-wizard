@@ -68,7 +68,10 @@ class Carousel extends Component {
                 size={40}
               />
             </Button>
-            <Button handleClick={() => this.handleClick('right')}>
+            <Button
+              className="carousel-right"
+              handleClick={() => this.handleClick('right')}
+            >
               <MaterialIcon
                 color={'rgb(25, 62, 77)'}
                 icon="keyboard_arrow_right"
@@ -84,7 +87,10 @@ class Carousel extends Component {
                 size={50}
               />
             </Button>
-            <Button handleClick={() => this.handleClick('right')}>
+            <Button
+              className="carousel-right"
+              handleClick={() => this.handleClick('right')}
+            >
               <MaterialIcon
                 color={'rgb(25, 62, 77)'}
                 icon="keyboard_arrow_right"
@@ -145,8 +151,21 @@ const StyledCarousel = styled.div`
     height: 100%;
     cursor: pointer;
     transition: opacity 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
     &:hover {
-      opacity: 0.6;
+      opacity: 0.8;
+    }
+    & > svg {
+      max-height: 60%;
+      transition: filter 0.2s ease-in-out;
+      filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.8));
+      &:hover {
+        filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.8));
+      }
+      &:active {
+        filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.8));
+      }
     }
   }
 `
