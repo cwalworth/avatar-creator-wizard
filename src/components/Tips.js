@@ -51,6 +51,18 @@ class Tips extends Component {
       visible: false
     })
   }
+  handleLeftPosition = width => {
+    switch (true) {
+      case width > 2800:
+        return 3
+      case width > 2000:
+        return 2.5
+      case width > 1400:
+        return 2
+      default:
+        return 1.5
+    }
+  }
   render() {
     return (
       <StyledTips>
@@ -77,7 +89,8 @@ class Tips extends Component {
             }px`,
             left: `${
               this.state[this.state.current]
-                ? this.state[this.state.current].x / 2
+                ? this.state[this.state.current].x /
+                  this.handleLeftPosition(window.innerWidth)
                 : 0
             }px`,
             display: `${
