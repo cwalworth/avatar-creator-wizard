@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { BrowserView, MobileView, isMobile } from 'react-device-detect'
 import MaterialIcon from 'material-icons-react'
 import Button from './Button'
+import { formatShapeString } from './helpers'
 
 class Carousel extends Component {
   state = {
@@ -32,12 +33,12 @@ class Carousel extends Component {
   }
   selectFeature = (feature, handleShapeClick) => {
     this.setState({
-      feature: feature.props
+      feature: feature.props.shape
     })
-    handleShapeClick(feature.props)
+    handleShapeClick(feature.props.shape, feature.props.color)
   }
   handleActiveBodyPart = part => {
-    const newPart = Object.keys(part.name.props)[0]
+    const newPart = formatShapeString(part.props.shape)
     const currentPart = this.state.bodyPart
     if (newPart !== currentPart) {
       this.setState(prevState => ({
@@ -58,11 +59,11 @@ class Carousel extends Component {
               <div
                 key={`item${index}`}
                 onClick={() =>
-                  this.selectFeature(item.name, this.props.handleShapeClick)
+                  this.selectFeature(item, this.props.handleShapeClick)
                 }
                 className="item"
               >
-                {item.name}
+                {item}
               </div>
             )
           })}

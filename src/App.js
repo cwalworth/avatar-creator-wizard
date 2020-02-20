@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { BrowserView, MobileView, isMobile } from 'react-device-detect'
 import MaterialIcon from 'material-icons-react'
@@ -7,23 +6,12 @@ import ColorSelector from './components/ColorSelector'
 import ProgressBar from './components/ProgressBar'
 import Carousel from './components/Carousel'
 import Button from './components/Button'
-import Head from './components/avatar/Head'
-import Eyes from './components/avatar/Eyes'
-import Mouth from './components/avatar/Mouth'
-import Nose from './components/avatar/Nose'
-import Extra from './components/avatar/Extra'
+import { shapes, handleShapeClick } from './components/helpers'
+import { shapesGroup } from './components/data'
 import Monster from './components/Monster'
 import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
 import Tips from './components/Tips'
-import {
-  selectHead,
-  selectEyes,
-  selectMouth,
-  selectNose,
-  selectExtras
-} from './redux/actions'
-import store from './redux/store'
 
 class App extends Component {
   state = {
@@ -62,75 +50,29 @@ class App extends Component {
       color: rgb
     })
   }
-  handleShapeClick = shape => {
-    const value = Object.keys(shape)[0]
-    switch (value) {
-      case 'head':
-        store.dispatch(selectHead(shape, true))
-        break
-      case 'eyes':
-        store.dispatch(selectEyes(shape, true))
-        break
-      case 'mouth':
-        store.dispatch(selectMouth(shape, true))
-        break
-      case 'nose':
-        store.dispatch(selectNose(shape, true))
-        break
-      case 'extra':
-        store.dispatch(selectExtras(shape, true))
-        break
-      default:
-        store.dispatch(selectHead('', true))
-        store.dispatch(selectEyes('', true))
-        store.dispatch(selectMouth('', true))
-        store.dispatch(selectNose('', true))
-        store.dispatch(selectExtras('', true))
-    }
-  }
   render() {
-    const shapes = [
-      [
-        { name: <Head head="head_1" color={this.state.color} /> },
-        { name: <Head head="head_2" color={this.state.color} /> },
-        { name: <Head head="head_3" color={this.state.color} /> }
-      ],
-      [
-        { name: <Eyes eyes="eyes_1" color={this.state.color} /> },
-        { name: <Eyes eyes="eyes_2" color={this.state.color} /> },
-        { name: <Eyes eyes="eyes_3" color={this.state.color} /> }
-      ],
-      [
-        { name: <Mouth mouth="mouth_1" color={this.state.color} /> },
-        { name: <Mouth mouth="mouth_2" color={this.state.color} /> },
-        { name: <Mouth mouth="mouth_3" color={this.state.color} /> }
-      ],
-      [
-        { name: <Nose nose="nose_1" color={this.state.color} /> },
-        { name: <Nose nose="nose_2" color={this.state.color} /> },
-        { name: <Nose nose="nose_3" color={this.state.color} /> }
-      ],
-      [
-        { name: <Extra extra="extras_1" color={this.state.color} /> },
-        { name: <Extra extra="extras_2" color={this.state.color} /> }
-      ]
-    ]
+    const shapeComponentsGroup = shapesGroup.map(group =>
+      group.map(shape => shapes(shape, this.state.color))
+    )
     return (
       <StyledApp className="App">
         <Tips>
           <ProgressBar
             progress={{
               activeWindow: this.state.activeWindow,
-              totalWindows: shapes.length
+              totalWindows: shapesGroup.length
             }}
           />
           <Monster />
-          <Button className="clear" handleClick={this.handleShapeClick}>
+          <Button
+            className="clear"
+            handleClick={() => handleShapeClick('clear')}
+          >
             Clear
           </Button>
           <Carousel
-            handleShapeClick={this.handleShapeClick}
-            items={shapes[this.state.activeWindow]}
+            handleShapeClick={handleShapeClick}
+            items={shapeComponentsGroup[this.state.activeWindow]}
           />
           <ColorSelector handleChange={this.handleChangeColor} />
           <div className="controls-wrapper">
@@ -139,7 +81,7 @@ class App extends Component {
                 <Button
                   primary
                   name="previous"
-                  handleClick={e => this.handleClick(e, shapes)}
+                  handleClick={e => this.handleClick(e, shapesGroup)}
                 >
                   Previous
                 </Button>
@@ -149,7 +91,7 @@ class App extends Component {
                 <Button
                   primary
                   name="next"
-                  handleClick={e => this.handleClick(e, shapes)}
+                  handleClick={e => this.handleClick(e, shapesGroup)}
                 >
                   Next
                 </Button>
@@ -160,7 +102,7 @@ class App extends Component {
                 <Button
                   secondary
                   name="previous"
-                  handleClick={e => this.handleClick(e, shapes)}
+                  handleClick={e => this.handleClick(e, shapesGroup)}
                 >
                   <MaterialIcon
                     color={'#01579B'}
@@ -175,7 +117,7 @@ class App extends Component {
                 <Button
                   secondary
                   name="next"
-                  handleClick={e => this.handleClick(e, shapes)}
+                  handleClick={e => this.handleClick(e, shapesGroup)}
                 >
                   <MaterialIcon
                     color={'#01579B'}
@@ -251,12 +193,4 @@ const StyledApp = styled.div`
   }
 `
 
-const mapDispatchToProps = dispatch => ({
-  selectHead: shape => dispatch(selectHead(shape)),
-  selectEyes: shape => dispatch(selectEyes(shape)),
-  selectMouth: shape => dispatch(selectMouth(shape)),
-  selectNose: shape => dispatch(selectNose(shape)),
-  selectExtras: shape => dispatch(selectExtras(shape))
-})
-
-export default connect(mapDispatchToProps)(App)
+export default App

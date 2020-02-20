@@ -26,27 +26,27 @@ export default function(state = initialState, action) {
     case 'SELECT_HEAD':
       return {
         ...state,
-        head: { name: action.payload.head, color: action.payload.color }
+        head: { name: action.payload.shape, color: action.payload.color }
       }
     case 'SELECT_EYES':
       return {
         ...state,
-        eyes: { name: action.payload.eyes, color: action.payload.color }
+        eyes: { name: action.payload.shape, color: action.payload.color }
       }
     case 'SELECT_MOUTH':
       return {
         ...state,
-        mouth: { name: action.payload.mouth, color: action.payload.color }
+        mouth: { name: action.payload.shape, color: action.payload.color }
       }
     case 'SELECT_NOSE':
       return {
         ...state,
-        nose: { name: action.payload.nose, color: action.payload.color }
+        nose: { name: action.payload.shape, color: action.payload.color }
       }
     case 'SELECT_EXTRAS':
       return {
         ...state,
-        extras: { name: action.payload.extra, color: action.payload.color }
+        extras: { name: action.payload.shape, color: action.payload.color }
       }
     default:
       return state

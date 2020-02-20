@@ -11,23 +11,23 @@ const Monster = props => {
   return (
     <StyledMonster id="monster">
       <div className="container container--head">
-        <Head head={props.select.head.name} color={props.select.head.color} />
+        <Head shape={props.select.head.name} color={props.select.head.color} />
       </div>
       <div className="container container--eyes">
-        <Eyes eyes={props.select.eyes.name} color={props.select.eyes.color} />
+        <Eyes shape={props.select.eyes.name} color={props.select.eyes.color} />
       </div>
       <div className="container container--mouth">
         <Mouth
-          mouth={props.select.mouth.name}
+          shape={props.select.mouth.name}
           color={props.select.mouth.color}
         />
       </div>
       <div className="container container--nose">
-        <Nose nose={props.select.nose.name} color={props.select.nose.color} />
+        <Nose shape={props.select.nose.name} color={props.select.nose.color} />
       </div>
       <div className={`container container--extra ${props.select.extras.name}`}>
         <Extra
-          extra={props.select.extras.name}
+          shape={props.select.extras.name}
           color={props.select.extras.color}
         />
       </div>

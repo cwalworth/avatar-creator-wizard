@@ -1,23 +1,23 @@
 import React from 'react'
 
-const Eyes = ({ eyes, color }) => {
+const Eyes = ({ shape, color }) => {
   return (
     <svg
       width="100%"
       height="100%"
       viewBox={
-        eyes === 'eyes_1'
+        shape === 'eyes_1'
           ? '0 0 43 15'
-          : eyes === 'eyes_2'
+          : shape === 'eyes_2'
           ? '0 0 27 7'
-          : eyes === 'eyes_3'
+          : shape === 'eyes_3'
           ? '0 0 34 12'
           : null
       }
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {eyes === 'eyes_1' && (
+      {shape === 'eyes_1' && (
         <g id="eyes_1">
           <g>
             <path
@@ -41,7 +41,7 @@ const Eyes = ({ eyes, color }) => {
           </g>
         </g>
       )}
-      {eyes === 'eyes_2' && (
+      {shape === 'eyes_2' && (
         <g>
           <path
             d="M11.135,1.874c0,-0.79 -0.641,-1.431 -1.431,-1.431l-7.83,0c-0.79,0 -1.431,0.641 -1.431,1.431l0,2.862c0,0.789 0.641,1.431 1.431,1.431l7.83,0c0.79,0 1.431,-0.642 1.431,-1.431l0,-2.862Z"
@@ -55,7 +55,7 @@ const Eyes = ({ eyes, color }) => {
           <circle fill={color} cx="20.509" cy="3.305" r="0.604" />
         </g>
       )}
-      {eyes === 'eyes_3' && (
+      {shape === 'eyes_3' && (
         <g>
           <g>
             <circle
